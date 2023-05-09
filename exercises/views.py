@@ -20,11 +20,13 @@ class ExerciseListCreateView(generics.GenericAPIView, mixins.ListModelMixin, mix
         return self.create(request, *args, **kwargs)
 
 
+#TODO: VIEW FOR RETRIEVING; UPDATING AND DELETING PARTICULAR OBJECT
 class ExerciseRetrieveUpdateDeleteView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                                        mixins.DestroyModelMixin):
 
     serializer_class = ExercisesSerializer
     queryset = Exercises.objects.all()
+    # lookup_field is for url parameter
     lookup_field = 'id'
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
