@@ -44,6 +44,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'base.urls'
 
+REST_FRAMEWORK = {
+    "NON_FIELD_ERRORS_KEY": "Errors"
+}
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
