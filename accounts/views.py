@@ -5,11 +5,13 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
+from .tokens import create_jwt_pair_for_user
 
 
 class SignUpView(generics.GenericAPIView):
 
     serializer_class = SignUpSerializer
+    permission_classes = []
 
     def post(self, request: Request):
         data = request.data
@@ -34,7 +36,8 @@ class LoginView(APIView):
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:
-            response = {"message": "Login successfull!", "token": user.auth_token.key}
+            tokens = create_jwt_pair_for_user(user)
+            response = {"message": "Login successfull!", "tokens": tokens}
             return Response(data=response, status=status.HTTP_200_OK)
         else:
             return Response(data={"message": "Invalid username or password"})

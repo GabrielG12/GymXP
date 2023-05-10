@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 
 
 class SignUpSerializer(serializers.ModelSerializer):
+
     email = serializers.CharField(max_length=80)
     username = serializers.CharField(max_length=45)
     #TODO: PASSWORD NI VIDEN NOBENEMU Z write_only =TRUE
