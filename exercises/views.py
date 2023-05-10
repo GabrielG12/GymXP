@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view, APIView
 from .models import Exercises
 from .serializers import ExercisesSerializer
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -14,8 +15,11 @@ class ExerciseListCreateView(generics.GenericAPIView, mixins.ListModelMixin, mix
 
     serializer_class = ExercisesSerializer
     queryset = Exercises.objects.all()
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
