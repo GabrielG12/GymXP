@@ -33,3 +33,11 @@ class SignUpSerializer(serializers.ModelSerializer):
         user.save()
         Token.objects.create(user=user)
         return user
+
+
+class CurrentUserExercisesSerializer(serializers.ModelSerializer):
+
+    exercises = serializers.StringRelatedField(many=True)
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'exercises']

@@ -7,6 +7,7 @@ urlpatterns = [
     #CLASS_BASED
     path('', views.ExerciseListCreateView.as_view(), name="exercises_list_create"),
     path('<int:id>/', views.ExerciseRetrieveUpdateDeleteView.as_view(), name="exercises_retrieve_update_delete"),
+    path('current_user/', views.get_exercises_for_current_user, name="current_user"),
 
 
 ]
