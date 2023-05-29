@@ -8,6 +8,7 @@ from .serializers import ExercisesSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from accounts.serializers import CurrentUserExercisesSerializer
+from .permissions import AuthorOrReadOnly
 
 
 
@@ -37,6 +38,7 @@ class ExerciseRetrieveUpdateDeleteView(generics.GenericAPIView, mixins.RetrieveM
 
     serializer_class = ExercisesSerializer
     queryset = Exercises.objects.all()
+    permission_classes = [AuthorOrReadOnly]
     # lookup_field is for url parameter
     lookup_field = 'id'
     def get(self, request, *args, **kwargs):
